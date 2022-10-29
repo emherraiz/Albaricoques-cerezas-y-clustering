@@ -20,19 +20,20 @@
 
 
 
-import pandas as pnd
+import pandas as pd
 import matplotlib.pyplot as plt
 
 
-#Caraga de datos
-frutas = pnd.read_csv("datas/frutas.csv", names=['DIAMETRO','PESO'], header=None)
+# Carga de datos
+frutas = pd.read_csv("datas/frutas.csv", names=['DIAMETRO','PESO'], header=None)
 
 #Visualización gráfica de los datos
 frutas.plot.scatter(x="DIAMETRO",y="PESO")
 plt.show()
 
 
-#Aprendizaje con el algoritmo K-Mean
+# Aprendizaje con el algoritmo K-Mean (K-Medias)
+# Para cantidades pequeñas de datos (inferior a 10.000)
 from sklearn.cluster import KMeans
 modelo=KMeans(n_clusters=2)
 modelo.fit(frutas)
