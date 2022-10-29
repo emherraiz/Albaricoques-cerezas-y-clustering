@@ -36,6 +36,8 @@ plt.show()
 # Para cantidades pequeñas de datos (inferior a 10.000)
 from sklearn.cluster import KMeans
 modelo=KMeans(n_clusters=2)
+
+# Ajustamos el modelo con nuestro DataFrame
 modelo.fit(frutas)
 
 #Predicciones
