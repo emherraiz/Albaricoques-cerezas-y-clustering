@@ -53,7 +53,7 @@ predicciones_kmeans = modelo.predict(frutas)
 # s = Tamaño de las frutas en la gráfica
 # cmap = Secuencia de colores que vamos a seguir
     # Referencia de colores https://matplotlib.org/2.0.2/examples/color/colormaps_reference.html
-plt.scatter(frutas.DIAMETRO, frutas.PESO, c='predicciones_kmeans', s=30, cmap='viridis')
+plt.scatter(frutas.DIAMETRO, frutas.PESO, c=predicciones_kmeans, s=30, cmap='viridis')
 
 # Etiqueta eje x
 plt.xlabel("DIAMETRO")
@@ -69,8 +69,8 @@ plt.scatter(centers[:, 0], centers[:, 1], c='black', s=200, alpha=0.5)
 plt.show()
 
 #Guardar el modelo (eliminar marca de comentario # si es necesario)
-#from joblib import dump
-#dump(modelo,'modelos/kmean.joblib')
+from joblib import dump
+dump(modelo,'modelos/kmean.joblib')
 
 #--- Realización de las clasificaciones --
 #CEREZA: 26,98 mm de diametro ,8,75 gramos
