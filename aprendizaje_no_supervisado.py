@@ -37,19 +37,34 @@ plt.show()
 from sklearn.cluster import KMeans
 modelo=KMeans(n_clusters=2)
 
+
 # Ajustamos el modelo con nuestro DataFrame
 modelo.fit(frutas)
+
 
 #Predicciones
 predicciones_kmeans = modelo.predict(frutas)
 
-#Visualización de la clusterización
-plt.scatter(frutas.DIAMETRO, frutas.PESO, c=predicciones_kmeans, s=50, cmap='viridis')
+# Visualización de la clusterización
+# x = Diametro
+# y = peso
+# c = lista o matriz que asigna colores a cada uno de las frutas
+#   NOTA: En caso de pasarle un string con el nombre del color imprime todas las frutas del mismo color
+# s = Tamaño de las frutas en la gráfica
+# cmap = Secuencia de colores que vamos a seguir
+    # Referencia de colores https://matplotlib.org/2.0.2/examples/color/colormaps_reference.html
+plt.scatter(frutas.DIAMETRO, frutas.PESO, c='predicciones_kmeans', s=30, cmap='viridis')
+
+# Etiqueta eje x
 plt.xlabel("DIAMETRO")
+
+# Etiqueta eje y
 plt.ylabel("PESO")
 
-#Visualización de los centroides
+
+# Visualización de los centroides
 centers = modelo.cluster_centers_
+print(centers)
 plt.scatter(centers[:, 0], centers[:, 1], c='black', s=200, alpha=0.5)
 plt.show()
 
