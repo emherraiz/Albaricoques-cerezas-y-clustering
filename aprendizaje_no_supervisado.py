@@ -40,6 +40,7 @@ modelo=KMeans(n_clusters=2)
 
 # Ajustamos el modelo con nuestro DataFrame
 modelo.fit(frutas)
+print(type(modelo))
 
 
 #Predicciones
@@ -68,9 +69,15 @@ print(centers)
 plt.scatter(centers[:, 0], centers[:, 1], c='black', s=200, alpha=0.5)
 plt.show()
 
-#Guardar el modelo (eliminar marca de comentario # si es necesario)
-from joblib import dump
-dump(modelo,'modelos/kmean.joblib')
+# Guardar el modelo (eliminar marca de comentario # si es necesario)
+#from joblib import dump
+#dump(modelo,'modelos/kmean.joblib')
+
+
+# Ahora creamos un script nuevo de python llamado clasificaciones.py
+# Cargamos el modelo con:
+# from joblib import load
+# modelo = load('modelos/kmean.joblib')
 
 #--- Realización de las clasificaciones --
 #CEREZA: 26,98 mm de diametro ,8,75 gramos
@@ -116,6 +123,7 @@ gmm.fit(frutas)
 
 #Clasificación
 clusteres = gmm.predict(frutas)
+print(clusteres)
 
 #Visualización de los clústeres
 plt.scatter(frutas.DIAMETRO, frutas.PESO, c=clusteres, s=40, cmap='viridis');
