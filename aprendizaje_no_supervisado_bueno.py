@@ -53,9 +53,24 @@ class Aprendizaje():
         # Predicciones
         self.predicciones = self.modelo.predict(self.frutas)
 
+    def predecir_fruta(self, diametro, peso):
+        '''_summary_: Predice a que cluster pertenece una fruta
+
+        Args:
+            diametro (float): Diametro de la fruta
+            peso (float): Peso de la fruta
+
+        Returns:
+            int: Cluster al que pertenece la fruta
+        '''
+        return self.modelo.predict([[diametro, peso]])
+
+
+
     def visualizacion(self):
         '''_summary_: Visualización de los datos y de la clusterización'''
-        # Visualización de la clusterización
+
+        # Visualización gráfica de los datos
         # x = Diametro
         # y = peso
         # c = lista o matriz que asigna colores a cada uno de las frutas
