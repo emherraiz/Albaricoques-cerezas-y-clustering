@@ -1,5 +1,13 @@
+# Para el trabajo con DataFrames
+import numpy as np
 import pandas as pd
+
+# Para la visualización de los datos
 import matplotlib.pyplot as plt
+from mpl_toolkits.mplot3d import axes3d, Axes3D
+
+# Para la generación de datos
+import scipy.stats as st
 
 #---- Modelo de K-Mean (K-Medias)-----------
 # Para cantidades pequeñas de datos (inferior a 10.000)
@@ -94,6 +102,60 @@ class Aprendizaje():
         # Mostramos la gráfica
         plt.show()
 
+    def visualizacion_3D(self):
+
+        # ----------------------------------------------------------------
+        # Visualización primera curva de nivel
+        # ----------------------------------------------------------------
+        # Extraemos los datos de los ejes
+        x = self.frutas.DIAMETRO
+        y = self.frutas.PESO
+
+        # Definimos los limites
+        deltaX = (max(x) - min(x))/10
+        deltaY = (max(y) - min(y))/10
+        xmin = min(x) - deltaX
+        xmax = max(x) + deltaX
+        ymin = min(y) - deltaY
+        ymax = max(y) + deltaY
+
+        # Crear meshgrid (Malla sobre la cual vamos a pintar)
+        xx, yy = np.mgrid[xmin:xmax:100j, ymin:ymax:100j]
+
+        # Definimos las posiciones de cada uno de los valores
+        posiciones = np.vstack([xx.ravel(), yy.ravel()])
+        values = np.vstack([x, y])
+
+        # Creamos el kernel
+        kernel = st.gaussian_kde(values)
+        f = np.reshape(kernel(posiciones).T, xx.shape)
+
+        # Creamos la figura
+        fig = plt.figure(figsize=(8,8))
+        ax = fig.gca()
+        ax.set_xlim(xmin, xmax)
+        ax.set_ylim(ymin, ymax)
+        cfset = ax.contourf(xx, yy, f, cmap='coolwarm')
+        ax.imshow(np.rot90(f), cmap='coolwarm', extent=[xmin, xmax, ymin, ymax])
+        cset = ax.contour(xx, yy, f, colors='k')
+        ax.clabel(cset, inline=1, fontsize=10)
+        ax.set_xlabel('X')
+        ax.set_ylabel('Y')
+        plt.show()
+
+        # ----------------------------------------------------------------
+        # Visualizacion 3D
+        # ----------------------------------------------------------------
+
+        fig = plt.figure(figsize=(13, 7))
+        ax = plt.axes(projection='3d')
+        surf = ax.plot_surface(xx, yy, f, rstride=1, cstride=1, cmap='coolwarm', edgecolor='none')
+        ax.set_xlabel('x')
+        ax.set_ylabel('y')
+        fig.colorbar(surf, shrink=0.5, aspect=5) # añadir barra de color indicando el PDF
+        ax.view_init(60, 35)
+        plt.show()
+
     def guardar_modelo(self, name_model):
         '''_summary_: Guarda el modelo en un fichero
 
@@ -102,7 +164,10 @@ class Aprendizaje():
         '''
         dump(self.modelo, name_model)
 
+sdf = Aprendizaje('datas/frutas.csv')
 
+sdf.aprendizaje_gmm()
+sdf.visualizacion()
 
 
 
