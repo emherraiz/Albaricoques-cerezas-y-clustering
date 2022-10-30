@@ -103,6 +103,7 @@ class Aprendizaje():
         plt.show()
 
     def visualizacion_3D(self):
+        '''_summary_: Visualización de los datos y de la clusterización en 3D'''
 
         # ----------------------------------------------------------------
         # Visualización primera curva de nivel
@@ -167,7 +168,7 @@ class Aprendizaje():
 sdf = Aprendizaje('datas/frutas.csv')
 
 sdf.aprendizaje_gmm()
-sdf.visualizacion()
+sdf.visualizacion_3D()
 
 
 
