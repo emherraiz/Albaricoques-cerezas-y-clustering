@@ -165,10 +165,6 @@ class Aprendizaje():
         '''
         dump(self.modelo, name_model)
 
-sdf = Aprendizaje('datas/frutas.csv')
-
-sdf.aprendizaje_gmm()
-sdf.visualizacion_3D()
 
 
 

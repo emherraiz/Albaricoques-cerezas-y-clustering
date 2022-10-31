@@ -73,15 +73,16 @@ def generar_datos():
 
     #Constitución de las observaciones
     # Concatenamos en una lista las observaciones de cerezas y albaricoques
-    frutas = cerezas+albaricoques
-    print(frutas)
+        frutas = cerezas+albaricoques
+        print(frutas)
 
     # De seguido mezclamos la lista al azar, de esta manera no sabremos donde se encuentra cada fruta
-    random.shuffle(frutas)
+        random.shuffle(frutas)
 
     # Guardado de las observaciones en un archivo
-    dataFrame = pd.DataFrame(frutas)
-    dataFrame.to_csv("datas/frutas.csv", index=False,header=False)
+        dataFrame = pd.DataFrame(frutas)
+        return dataFrame
+
 
 
 
